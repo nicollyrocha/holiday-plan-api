@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("express-async-errors");
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const routes_1 = require("./server/routes");
+const api_1 = require("./api");
 const bodyparser = require('body-parser');
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 5000;
@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 });
 app.use(express_1.default.static('public'));
 app.use(express_1.default.json());
-app.use(routes_1.router);
+app.use(api_1.router);
 app.use(bodyparser.urlencoded({ extended: false }));
 module.exports = app;
 //# sourceMappingURL=index.js.map

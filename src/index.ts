@@ -1,8 +1,8 @@
 import 'express-async-errors';
 import express from 'express';
 import cors from 'cors';
-import { router } from './api';
 const bodyparser = require('body-parser');
+import { router } from './api';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
