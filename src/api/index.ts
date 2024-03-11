@@ -1,5 +1,4 @@
 import { Router } from 'express';
-const holidayController = require('../../controllers/holidays.controller');
 
 const router = Router();
 
