@@ -1,5 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 const db = require('../config/database');
 exports.getHolidays = async (req, res) => {
     const { rows } = await db.query(`SELECT * FROM holidays`);

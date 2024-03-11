@@ -9,14 +9,11 @@ const cors_1 = __importDefault(require("cors"));
 const routes_1 = require("./server/routes");
 const bodyparser = require('body-parser');
 const app = (0, express_1.default)();
-app.get('/', (req, res) => {
-    res.send('Express on Vercel');
-});
 const PORT = process.env.PORT || 5000;
+app.use((0, cors_1.default)());
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(routes_1.router);
 app.use(bodyparser.urlencoded({ extended: false }));
