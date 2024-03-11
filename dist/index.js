@@ -7,7 +7,7 @@ require("express-async-errors");
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const bodyparser = require('body-parser');
-const index_1 = require("./routes/index");
+const index_1 = require("./api/index");
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 5000;
 app.use((0, cors_1.default)());

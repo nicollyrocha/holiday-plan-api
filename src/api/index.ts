@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 const router = Router();
 
-router.get('/', async (req: any, res: any) => {
+router.get('/holidays', async (req: any, res: any) => {
 	const { rows } = await req.query(`SELECT * FROM holidays`);
 
 	if (rows.length > 0) {
