@@ -1,7 +1,7 @@
 import 'express-async-errors';
 import express from 'express';
 import cors from 'cors';
-import { router } from '../src/server/routes';
+import { router } from './src/server/routes';
 const bodyparser = require('body-parser');
 
 const app = express();
