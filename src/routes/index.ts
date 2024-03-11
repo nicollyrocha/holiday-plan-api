@@ -1,7 +1,10 @@
-const db = require('../config/database');
+import { Router } from 'express';
+const holidayController = require('../../controllers/holidays.controller');
 
-exports.getHolidays = async (req: any, res: any) => {
-	const { rows } = await db.query(`SELECT * FROM holidays`);
+const router = Router();
+
+router.get('/', async (req: any, res: any) => {
+	const { rows } = await req.query(`SELECT * FROM holidays`);
 
 	if (rows.length > 0) {
 		res.status(201).send({
@@ -15,16 +18,15 @@ exports.getHolidays = async (req: any, res: any) => {
 			status: 400,
 		});
 	}
-};
-
-exports.createHoliday = async (req: any, res: any) => {
+});
+router.post('/holiday', async (req: any, res: any) => {
 	const { date, title, description, participants, locations } = req.body;
 	const formatArrayLocations = locations.map((object: string) => `'${object}'`);
 	const formatArrayParticipants = participants
 		? participants.map((object: string) => `'${object}'`)
 		: [];
 
-	const { rows } = await db.query(
+	const { rows } = await req.query(
 		`SELECT * FROM holidays WHERE date = '${date}'`
 	);
 
@@ -34,7 +36,7 @@ exports.createHoliday = async (req: any, res: any) => {
 			status: 400,
 		});
 	} else {
-		await db.query(
+		await req.query(
 			`INSERT INTO holidays (title, description, date, locations${
 				participants.length > 0 ? ', participants' : ''
 			}) VALUES ('${title}', '${description}', '${date}', array[ ${formatArrayLocations} ]${
@@ -51,16 +53,15 @@ exports.createHoliday = async (req: any, res: any) => {
 			status: 201,
 		});
 	}
-};
-
-exports.updateHoliday = async (req: any, res: any) => {
+});
+router.put('/holiday', async (req: any, res: any) => {
 	const { participants, locations, date, title, description, id } = req.body;
 	const formatArrayLocations = locations.map((object: string) => `'${object}'`);
 	const formatArrayParticipants = participants
 		? participants.map((object: string) => `'${object}'`)
 		: [];
 
-	const { rows } = await db.query(
+	const { rows } = await req.query(
 		`SELECT * FROM holidays WHERE date = '${date}' AND id != '${id}'`
 	);
 
@@ -70,7 +71,7 @@ exports.updateHoliday = async (req: any, res: any) => {
 			status: 400,
 		});
 	} else {
-		await db.query(
+		await req.query(
 			`UPDATE holidays SET title = '${title}', description = '${description}', date = '${date}', locations = array[ ${formatArrayLocations} ]${
 				participants && participants.length > 0
 					? `, participants = array[ ${formatArrayParticipants} ]`
@@ -82,12 +83,11 @@ exports.updateHoliday = async (req: any, res: any) => {
 			message: 'Holiday updated!',
 		});
 	}
-};
-
-exports.deleteHoliday = async (req: any, res: any) => {
+});
+router.delete('/holiday/:id', async (req: any, res: any) => {
 	const id = req.params.id;
 
-	const { rows } = await db
+	const { rows } = await req
 		.query(`DELETE FROM holidays WHERE id = '${id}'`)
 		.then((data: any) =>
 			res.status(201).send({
@@ -101,4 +101,6 @@ exports.deleteHoliday = async (req: any, res: any) => {
 				status: 400,
 			});
 		});
-};
+});
+
+export { router };
