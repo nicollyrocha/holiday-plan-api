@@ -4,8 +4,8 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"build": "tsc",
-		"start": "ts-node dist/server/server.ts",
+		"build": "rimraf dist && tsc",
+		"start": "ts-node dist/server/server.js",
 		"dev": "ts-node src/server/server.ts",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
@@ -13,8 +13,15 @@
 		"@modules": "build/modules",
 		"@core": "build/core"
 	},
+	"pre-commit": [
+		"ts.check",
+		"build",
+		"add-build"
+	],
+	"ts.check": "tsc - project tsconfig.json",
+	"addd-build": "git add build",
 	"keywords": [],
-	"author": "",
+	"author": "Nicolly Rocha <nicollyrcs@gmail.com>",
 	"license": "ISC",
 	"dependencies": {
 		"@types/react": "^18.2.64",
@@ -34,8 +41,11 @@
 		"@types/express": "^4.17.21",
 		"@types/helmet": "^4.0.0",
 		"@types/morgan": "^1.9.9",
+		"pre-commit": "^1.2.2",
+		"rimraf": "^5.0.5",
 		"ts-node": "^10.9.2",
 		"tsconfig-paths": "^4.2.0",
 		"typescript": "^5.4.2"
-	}
+	},
+	"repository": "https://github.com/nicollyrocha/holiday-plan-api.git"
 }
