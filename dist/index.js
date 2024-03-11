@@ -21,4 +21,4 @@ app.use(express_1.default.json());
 app.use(routes_1.router);
 app.use(bodyparser.urlencoded({ extended: false }));
 module.exports = app;
-//# sourceMappingURL=app.js.map
+//# sourceMappingURL=index.js.map

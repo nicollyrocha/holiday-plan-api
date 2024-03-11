@@ -1,4 +1,3 @@
-import { Holiday } from '../models/holiday.model';
 const db = require('../config/database');
 
 exports.getHolidays = async (req: any, res: any) => {
