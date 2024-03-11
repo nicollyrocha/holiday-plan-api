@@ -13,11 +13,6 @@
 		"@modules": "build/modules",
 		"@core": "build/core"
 	},
-	"pre-commit": [
-		"ts.check",
-		"build",
-		"add-build"
-	],
 	"ts.check": "tsc - project tsconfig.json",
 	"addd-build": "git add build",
 	"keywords": [],
@@ -41,7 +36,6 @@
 		"@types/express": "^4.17.21",
 		"@types/helmet": "^4.0.0",
 		"@types/morgan": "^1.9.9",
-		"pre-commit": "^1.2.2",
 		"rimraf": "^5.0.5",
 		"ts-node": "^10.9.2",
 		"tsconfig-paths": "^4.2.0",
