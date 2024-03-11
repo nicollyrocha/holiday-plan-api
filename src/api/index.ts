@@ -102,4 +102,4 @@ router.delete('/holiday/:id', async (req: any, res: any) => {
 		});
 });
 
-export { router };
+export default router;
