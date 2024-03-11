@@ -25,5 +25,5 @@
 			"*": ["node_modules/*"]
 		}
 	},
-	"include": ["src/**/*", "api/server.ts"]
+	"include": ["src/**/*", "index.ts"]
 }
