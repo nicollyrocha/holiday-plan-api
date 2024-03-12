@@ -1,8 +1,6 @@
-import { Router } from 'express';
 const db = require('../config/database');
-const router = Router();
 
-router.get('/holidays', async (req: any, res: any) => {
+exports.getHolidays = async (req: any, res: any) => {
 	const { rows } = await db.query(`SELECT * FROM holidays`);
 
 	if (rows.length > 0) {
@@ -17,8 +15,9 @@ router.get('/holidays', async (req: any, res: any) => {
 			status: 400,
 		});
 	}
-});
-router.post('/holiday', async (req: any, res: any) => {
+};
+
+exports.createHoliday = async (req: any, res: any) => {
 	const { date, title, description, participants, locations } = req.body;
 	const formatArrayLocations = locations.map((object: string) => `'${object}'`);
 	const formatArrayParticipants = participants
@@ -52,8 +51,9 @@ router.post('/holiday', async (req: any, res: any) => {
 			status: 201,
 		});
 	}
-});
-router.put('/holiday', async (req: any, res: any) => {
+};
+
+exports.updateHoliday = async (req: any, res: any) => {
 	const { participants, locations, date, title, description, id } = req.body;
 	const formatArrayLocations = locations.map((object: string) => `'${object}'`);
 	const formatArrayParticipants = participants
@@ -82,11 +82,12 @@ router.put('/holiday', async (req: any, res: any) => {
 			message: 'Holiday updated!',
 		});
 	}
-});
-router.delete('/holiday/:id', async (req: any, res: any) => {
+};
+
+exports.deleteHoliday = async (req: any, res: any) => {
 	const id = req.params.id;
 
-	const { rows } = await req
+	const { rows } = await db
 		.query(`DELETE FROM holidays WHERE id = '${id}'`)
 		.then((data: any) =>
 			res.status(201).send({
@@ -100,6 +101,4 @@ router.delete('/holiday/:id', async (req: any, res: any) => {
 				status: 400,
 			});
 		});
-});
-
-export default router;
+};
