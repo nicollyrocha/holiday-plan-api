@@ -1,6 +1,5 @@
 import { Router } from 'express';
 const db = require('../config/database');
-
 const router = Router();
 
 router.get('/holidays', async (req: any, res: any) => {
@@ -87,7 +86,7 @@ router.put('/holiday', async (req: any, res: any) => {
 router.delete('/holiday/:id', async (req: any, res: any) => {
 	const id = req.params.id;
 
-	const { rows } = await db
+	const { rows } = await req
 		.query(`DELETE FROM holidays WHERE id = '${id}'`)
 		.then((data: any) =>
 			res.status(201).send({
