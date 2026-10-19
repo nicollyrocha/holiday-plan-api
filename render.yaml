@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: holiday-plan-api
+    runtime: node
+    plan: free
+    buildCommand: yarn build
+    startCommand: yarn start
+    envVars:
+      - key: DATABASE_URL
+        sync: false
